@@ -32,6 +32,28 @@ CF에서는 사용자간 ```유사도```를 구하는 것이 핵심이다.
 
 ## 학교 수업내용 정리
 ### 'User-User' Collaborative Filtering
+- Consider user x and unrated item i 
+- Find set N of other users **whose ratings are similar to x's ratings** 
+- ```Estimate``` **x's ratings for i** based on **ratings for i of users in N**
+
+### Similar Users 찾기 : 코사인 유사도(Cosine similarity measure) 이용
+<img src="../img/cf-1.png"/>
+
+- 코사인 유사도가 0에 가까울수록 두 객체는 유사하다!
+- Problem with Raw Cosine : Treats missing ratings as 'negative'
+- Solution : ```Mean-Centered``` Utility Matrix를 이용! 
+  - row에 row 원소들의 평균값(means)을 빼서 Mean-Centered Utility Matrix를 구할 수 있음
+  - 정규화(Normalization)와는 다름
+
+- Solution2 : Overlapping-Item Mean-Centering 
+  - 두 User가 모두 평점을 준 아이템만 가지고 코사인 유사도를 구하자! 
+  <img src="../img/cf-2.png"/>
+
+### 평점 예측하기
+1. 사용자와 비슷한 유저들이 item i에 매긴 평점의 평균값으로 예측하기
+2. (Even better) (다른 사용자 평가 * 다른 사용자와의 코사인 유사도)의 총합 / 코사인 유사도
+  <img src="../img/cf-3.png"/>   
+
 
 
 
